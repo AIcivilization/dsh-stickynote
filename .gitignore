@@ -4,3 +4,5 @@ node_modules/
 .DS_Store
 # 测试产生的临时库
 /tmp/
+# 本地推送辅助脚本（含 token 处理，不入库）
+push-to-github.sh

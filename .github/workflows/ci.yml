@@ -1,0 +1,33 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['20.x', '22.x', '24.x']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      # 这个插件零运行时依赖，所以没有 install 步骤 —— 是真的没有，不是漏了。
+      - name: 语法检查（6 个模块逐个 node --check）
+        run: npm run check
+
+      - name: 单元 / 集成测试
+        run: npm test
+
+      - name: 校验插件清单能被 JSON 解析
+        run: node -e "const p=require('./package.json');const d=p.dsh;if(!d||d.manifestVersion!==1)throw new Error('dsh.manifestVersion 必须为 1');if(!d.engines||!d.engines.dsh)throw new Error('缺少 engines.dsh');console.log('manifest ok, engines.dsh =',d.engines.dsh)"
