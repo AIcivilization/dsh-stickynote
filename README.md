@@ -1,11 +1,24 @@
 # dsh-stickynote · 随手贴
 
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![dsh](https://img.shields.io/badge/DSH-%3E%3D0.2.1--rc.5-4B6EF5)](https://github.com)
+[![tests](https://img.shields.io/badge/tests-68%20passing-brightgreen)](#开发)
+[![deps](https://img.shields.io/badge/runtime%20deps-0-brightgreen)](#依赖)
+
 > 灵感的入口：想到什么记下来，随时能扩展成一个成品。
 
 DeepSeek Harness 插件。侧栏单击打开主界面，顶部按钮 / `Alt+Space` 新建。保存后 AI 异步整理成标题、
 归类、补全要点、抽出待办；每条带 `+AI` 角标；一键投递到当前对话或新开对话。
 
+**它是分流的入口，不是又一本笔记。** 记下来只是第一步 —— AI 把每条卡分到「展示 / 深入 / 执行 / 参考」
+四条路之一，该收着的收着，该展开成成品的当场就能进对话。卡片命运由分类决定，不靠用户自己维护文件夹。
+
 设计文档见 [DESIGN.md](./DESIGN.md)（含用户原话存档与全部技术决策依据）。
+
+## 为什么叫这个
+
+命名按「用户搜索怎么最容易搜出来」定，不按好看定。`stickynote` 是主词，`便签 / 笔记 / 即时贴 / 速记 / 备忘 / 灵感`
+全部落在 `keywords` 与 `description` 里，中文搜、英文搜、搜产品名、搜品类，都能命中同一个包。
 
 ## 现在能做什么
 
