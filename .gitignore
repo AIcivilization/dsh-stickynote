@@ -6,3 +6,4 @@ node_modules/
 /tmp/
 # 本地推送辅助脚本（含 token 处理，不入库）
 push-to-github.sh
+publish-to-npm.sh

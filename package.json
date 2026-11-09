@@ -1,18 +1,38 @@
 {
   "name": "dsh-stickynote",
   "version": "0.1.0",
-  "description": "随手贴 —— 语音/文字秒记的 AI 即时贴便签。侧栏一个按键：单击新建、双击浏览；保存后 AI 自动整理成标题、归类、补全要点，每条带 +AI 角标，一键投递到当前对话或新开对话。快速记下灵感与思路，不让碎片在需要它的时候找不到。Quick AI sticky note · 便签 · 笔记 · 即时贴 · 速记 · 备忘 · 灵感收录",
+  "description": "随手贴 —— 语音/文字秒记的 AI 即时贴便签。侧栏一个按键：单击新建、双击浏览；保存后 AI 自动整理成标题、归类、补全要点，每条带 +AI 角标，一键投递到当前对话或新开对话。快速记下灵感与思路，不让碎片在需要它的时候找不到。Quick AI sticky note · 便签 · 笔记 · 即时贴 · 速记 · 备忘 · 灵感收录 · 灵感 · 待办 · 收件箱",
   "keywords": [
     "dsh",
     "dsh-plugin",
     "deepseek-harness",
+    "deepseek",
     "stickynote",
     "sticky-note",
+    "sticky-notes",
+    "quick-note",
     "note",
+    "note-taking",
+    "notes",
+    "memo",
+    "inbox",
+    "capture",
+    "todo",
+    "ai",
+    "llm",
+    "markdown",
+    "local-first",
+    "pkm",
+    "second-brain",
+    "voice-input",
     "便签",
     "笔记",
     "即时贴",
-    "速记"
+    "速记",
+    "备忘",
+    "灵感",
+    "待办",
+    "收件箱"
   ],
   "type": "module",
   "main": "./lib/index.js",
@@ -41,9 +61,26 @@
     "CHANGELOG.md",
     "test/"
   ],
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AIcivilization/dsh-stickynote.git"
+  },
+  "homepage": "https://github.com/AIcivilization/dsh-stickynote#readme",
+  "bugs": {
+    "url": "https://github.com/AIcivilization/dsh-stickynote/issues"
+  },
+  "author": "AIcivilization",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "license": "MIT",
   "scripts": {
     "check": "node --check lib/index.js && node --check lib/store.js && node --check lib/ai.js && node --check lib/rules.js && node --check lib/voice.js && node --check lib/client.js",
-    "test": "node test/run-all.mjs"
+    "test": "node test/run-all.mjs",
+    "prepublishOnly": "npm run check && npm test"
   }
 }

@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0（开发中）
+## 0.1.0（2026-11-09）
 
 首版：AI 驱动的灵感入口。想到什么记下来，AI 分类分流，深的能聊成成品，结论能长回卡片。
 
@@ -19,6 +19,13 @@
 - 待办 → ⏰ 设个提醒
 - 参考 → 🔗 找相关
 - 生活 / 未分类 → 👁 看看（展示）
+
+### 发布
+
+- npm: `dsh plugin --profile web add dsh-stickynote` 直接装
+- GitHub: https://github.com/AIcivilization/dsh-stickynote
+- CI 跑 node 20 / 22 / 24：68 条测试 + 6 个模块语法检查 + 清单校验
+- 零运行时依赖（Host 侧只用 `node:*` 内建，客户端只 `require('react')`，由宿主提供）
 
 **基础设施**
 - 扁平 Markdown 存储，一条一文件，创建后永不改名

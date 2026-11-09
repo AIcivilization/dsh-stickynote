@@ -1,6 +1,7 @@
 # dsh-stickynote · 随手贴
 
 [![ci](https://github.com/AIcivilization/dsh-stickynote/actions/workflows/ci.yml/badge.svg)](https://github.com/AIcivilization/dsh-stickynote/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/dsh-stickynote.svg)](https://www.npmjs.com/package/dsh-stickynote)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![dsh](https://img.shields.io/badge/DSH-%3E%3D0.2.1--rc.5-4B6EF5)](#安装)
 [![tests](https://img.shields.io/badge/tests-68%20passing-brightgreen)](#开发)
@@ -64,11 +65,21 @@ DeepSeek Harness 插件。侧栏单击打开主界面，顶部按钮 / `Alt+Spac
 
 ## 安装
 
+从 npm（推荐）：
+
+```bash
+dsh plugin --profile web add dsh-stickynote
+```
+
+从本地目录（改代码时用这个）：
+
 ```bash
 dsh plugin --profile web add /path/to/dsh-stickynote
 ```
 
-然后在 profile 的 `package.json` 里把 `dsh-stickynote` 加进 `dsh.profile.bundles`。
+然后在 profile 的 `package.json` 里把 `dsh-stickynote` 加进 `dsh.profile.bundles`，
+重启 dsh，硬刷新浏览器（`Ctrl+Shift+R`）—— 前端 bundle 带 immutable 缓存头，
+不硬刷会继续用旧的 manifest。
 
 ## 依赖
 
