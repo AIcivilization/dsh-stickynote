@@ -1,9 +1,10 @@
 # dsh-stickynote · 随手贴
 
+[![ci](https://github.com/AIcivilization/dsh-stickynote/actions/workflows/ci.yml/badge.svg)](https://github.com/AIcivilization/dsh-stickynote/actions/workflows/ci.yml)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
-[![dsh](https://img.shields.io/badge/DSH-%3E%3D0.2.1--rc.5-4B6EF5)](https://github.com)
+[![dsh](https://img.shields.io/badge/DSH-%3E%3D0.2.1--rc.5-4B6EF5)](#安装)
 [![tests](https://img.shields.io/badge/tests-68%20passing-brightgreen)](#开发)
-[![deps](https://img.shields.io/badge/runtime%20deps-0-brightgreen)](#依赖)
+[![runtime deps](https://img.shields.io/badge/runtime%20deps-0-brightgreen)](#依赖)
 
 > 灵感的入口：想到什么记下来，随时能扩展成一个成品。
 
@@ -94,3 +95,39 @@ dsh plugin --profile web add /path/to/dsh-stickynote
 - 「有空」「改天」这类没有确定时间的词**故意不解析** —— 猜错时间比不提醒更糟
 - 图片**只存不读** —— 默认不发给模型（隐私优先）；要让 AI 看图需要接 `attachment` 服务
 - 悬浮球、第二/三梯队提示都还没做
+
+## 开发
+
+```bash
+git clone https://github.com/AIcivilization/dsh-stickynote.git
+cd dsh-stickynote
+npm run check     # 6 个模块逐个 node --check
+npm test          # 68 条，全绿才算数
+```
+
+零依赖是硬约束：没有 `npm install` 这一步，测试只用 `node:assert`。
+加依赖就等于把这个插件从「装上就能用」变成「装之前先修依赖」。
+
+### 目录
+
+```
+lib/
+├── index.js    │ Host 侧：23 个 HTTP 端点、5 个模型工具、SSE、投递渲染
+├── client.js   │ 客户端：5 个 slot、三区面板、虚拟滚动、捕获浮层、语音
+├── store.js    │ 单一 Markdown 落盘、frontmatter 编解码、搜索、软删、图片
+├── rules.js    │ 无模型也能分类：领域词、关键词、CJK 2-gram 相似度
+└── voice.js    │ 语音：探测宿主能力、自采集（16k 单声道 PCM16 WAV）
+test/           │ 68 条，node:test 都不用，自带极简 harness
+```
+
+`DESIGN.md` 是决策依据，不是营销文档 —— 里面存了每一轮的用户原话，
+以及被推翻的方案和推翻它的原因。改行为之前先看它。
+
+## 贡献
+
+开 issue 说清楚「你想记什么、现在卡在哪」，比提 PR 有用。
+界面相关的改动请顺手截图，因为这东西的验收标准就是「一眼看懂」。
+
+## License
+
+[MIT](./LICENSE)
