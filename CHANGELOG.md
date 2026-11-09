@@ -1,5 +1,48 @@
 # Changelog
 
+## 0.1.3（2026-11-09）
+
+只加测试，不动行为：把「包名三处必须同名」钉成 9 条断言（`test/manifest.test.mjs`）。
+发这一版是为了让 npm 上的产物和仓库 HEAD 完全一致 —— 0.1.2 的 tarball 里还是旧测试集。
+
+总测试数 68 → **77**。
+
+## 0.1.2（2026-11-09）
+
+**修一个真 bug：改包名后插件装了但激活不了。**
+
+```
+stickynote (dsh-stickynote): failed to import:
+  Cannot find package 'dsh-stickynote' imported from …/profiles/web/
+```
+
+包名从 `dsh-stickynote` 改成 `dsh-note` 时，漏了另外两处**也必须是包名**的地方：
+
+| 位置 | 作用 | 漏了会怎样 |
+|---|---|---|
+| `cordis.patch.yml` 的 `name` | 宿主按它 import 这个包 | 找不到包，整条插件激活失败 |
+| `lib/client.js` 的 `__ModuleLoader__.load({ id })` | 前端 bundle 的注册 id | 界面那半边挂不上 |
+
+为什么本地一直没发现：之前用 `/path/to/dsh-stickynote` 目录装，包名和 patch 名**恰好相同**，
+这个耦合被掩盖了；一改成从 npm 装（包名 `dsh-note`）就立刻炸。同时把服务端
+`export const name`、API 前缀、日志标签一并统一到 `dsh-note`。
+
+**数据目录没动**：仍然是 `$DSH_HOME/stickynote/`，改包名不该让用户的数据搬家。
+
+收尾：`test/manifest.test.mjs` 就是为这个事故写的，改包名时它会当场喊。
+
+## 0.1.1（2026-11-09）
+
+npm 首发。代码与 0.1.0 完全一致，只是版本号必须往前挪一位：
+
+`0.1.0` 用 `npm publish` 推的时候被 registry 收进了**暂存发布区**（staged publishing）——
+因为带 Bypass 2FA 的 granular token 被判定为「没有 proof-of-presence」，npm 就把发布改成
+「先暂存、等维护者用 2FA 批准」。本机 npm 10.9.9 不认识这套协议，所以既没法拿到 stage-id
+去批准，`stage list` 也枚举不到那条记录，`0.1.0` 这个版本号就此被占死。
+
+绕过方式：带一次性验证码发布（等于当场提供 proof-of-presence），不再进暂存区。
+教训记在这：**发布环境的 npm 版本要跟着 registry 协议走**，CLI 太老会把版本号白白搭进去。
+
 ## 0.1.0（2026-11-09）
 
 首版：AI 驱动的灵感入口。想到什么记下来，AI 分类分流，深的能聊成成品，结论能长回卡片。
@@ -22,7 +65,8 @@
 
 ### 发布
 
-- npm: `dsh plugin --profile web add dsh-stickynote` 直接装
+- npm: `dsh plugin --profile web add dsh-note` 直接装
+  （包名用 `dsh-note` 而非 `dsh-stickynote`：后者与生态里已有的 `dsh-sticky-note` 归一化同形，被 npm 相似名规则挡下）
 - GitHub: https://github.com/AIcivilization/dsh-stickynote
 - CI 跑 node 20 / 22 / 24：68 条测试 + 6 个模块语法检查 + 清单校验
 - 零运行时依赖（Host 侧只用 `node:*` 内建，客户端只 `require('react')`，由宿主提供）

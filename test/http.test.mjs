@@ -25,7 +25,7 @@ async function boot(dshHome, extraServices = {}) {
   await new Promise((r) => server.listen(0, '127.0.0.1', r))
   const port = server.address().port
   const host = `127.0.0.1:${port}`
-  const base = `http://127.0.0.1:${port}/api/dsh-stickynote`
+  const base = `http://127.0.0.1:${port}/api/dsh-note`
   const post = async (p, b) => {
     const r = await fetch(base + p, { method:'POST', headers:{ 'Content-Type':'application/json', host }, body: JSON.stringify(b) })
     return { s: r.status, j: await r.json() }
@@ -65,7 +65,7 @@ describe('HTTP · 基本流程', () => {
     const dshHome = mkdtempSync(join(tmpdir(), 'sn-http-'))
     const { server } = await boot(dshHome)
     const port = server.address().port
-    const r = await fetch(`http://127.0.0.1:${port}/api/dsh-stickynote/capture`, {
+    const r = await fetch(`http://127.0.0.1:${port}/api/dsh-note/capture`, {
       method:'POST', headers:{ 'Content-Type':'application/json', host:`127.0.0.1:${port}`, origin:'http://evil.example' }, body:'{"text":"x"}'
     })
     eq(r.status, 403)

@@ -1,10 +1,15 @@
-# dsh-stickynote · 随手贴
+# 随手贴 · dsh-note
+
+> npm 包名 **`dsh-note`**，仓库名 `dsh-stickynote`。
+> 包名没用 `dsh-stickynote` 是因为它和生态里已有的 `dsh-sticky-note`（一个只有单条浮动便签的小插件）
+> 去掉连字符后完全同形，被 npm 的相似名规则直接挡下。`dsh-note` 更短、更贴产品本质，可搜索的品类词
+> （`sticky-note` / `便签` / `即时贴` / `速记`）全部铺在 keywords 与 description 里，不靠包名背。
 
 [![ci](https://github.com/AIcivilization/dsh-stickynote/actions/workflows/ci.yml/badge.svg)](https://github.com/AIcivilization/dsh-stickynote/actions/workflows/ci.yml)
-[![npm](https://img.shields.io/npm/v/dsh-stickynote.svg)](https://www.npmjs.com/package/dsh-stickynote)
+[![npm](https://img.shields.io/npm/v/dsh-note.svg)](https://www.npmjs.com/package/dsh-note)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![dsh](https://img.shields.io/badge/DSH-%3E%3D0.2.1--rc.5-4B6EF5)](#安装)
-[![tests](https://img.shields.io/badge/tests-68%20passing-brightgreen)](#开发)
+[![tests](https://img.shields.io/badge/tests-77%20passing-brightgreen)](#开发)
 [![runtime deps](https://img.shields.io/badge/runtime%20deps-0-brightgreen)](#依赖)
 
 > 灵感的入口：想到什么记下来，随时能扩展成一个成品。
@@ -68,7 +73,7 @@ DeepSeek Harness 插件。侧栏单击打开主界面，顶部按钮 / `Alt+Spac
 从 npm（推荐）：
 
 ```bash
-dsh plugin --profile web add dsh-stickynote
+dsh plugin --profile web add dsh-note
 ```
 
 从本地目录（改代码时用这个）：
@@ -77,7 +82,7 @@ dsh plugin --profile web add dsh-stickynote
 dsh plugin --profile web add /path/to/dsh-stickynote
 ```
 
-然后在 profile 的 `package.json` 里把 `dsh-stickynote` 加进 `dsh.profile.bundles`，
+然后在 profile 的 `package.json` 里把 `dsh-note` 加进 `dsh.profile.bundles`，
 重启 dsh，硬刷新浏览器（`Ctrl+Shift+R`）—— 前端 bundle 带 immutable 缓存头，
 不硬刷会继续用旧的 manifest。
 
@@ -113,7 +118,7 @@ dsh plugin --profile web add /path/to/dsh-stickynote
 git clone https://github.com/AIcivilization/dsh-stickynote.git
 cd dsh-stickynote
 npm run check     # 6 个模块逐个 node --check
-npm test          # 68 条，全绿才算数
+npm test          # 77 条，全绿才算数
 ```
 
 零依赖是硬约束：没有 `npm install` 这一步，测试只用 `node:assert`。
@@ -128,7 +133,7 @@ lib/
 ├── store.js    │ 单一 Markdown 落盘、frontmatter 编解码、搜索、软删、图片
 ├── rules.js    │ 无模型也能分类：领域词、关键词、CJK 2-gram 相似度
 └── voice.js    │ 语音：探测宿主能力、自采集（16k 单声道 PCM16 WAV）
-test/           │ 68 条，node:test 都不用，自带极简 harness
+test/           │ 77 条，node:test 都不用，自带极简 harness
 ```
 
 `DESIGN.md` 是决策依据，不是营销文档 —— 里面存了每一轮的用户原话，
