@@ -1,0 +1,6 @@
+# dsh-stickynote bundle patch: inserts this plugin into a profile's layer stack.
+# Every bundle contributes one layer; this layer only inserts its own row and
+# never patches another plugin.
+- insert:
+    - id: stickynote
+      name: dsh-stickynote

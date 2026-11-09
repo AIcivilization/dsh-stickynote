@@ -1,0 +1,6 @@
+node_modules/
+*.tgz
+*.log
+.DS_Store
+# 测试产生的临时库
+/tmp/
